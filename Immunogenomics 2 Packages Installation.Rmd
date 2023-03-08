@@ -1,0 +1,84 @@
+---
+title: "Immunogenomics 2 Packages Installation"
+author: "Hope Anderson"
+date: "2023-03-06"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. 
+
+```{r}
+# Required packages
+R_packages <- c("viridis","Seurat","tidyverse","RColorBrewer",
+                "MetBrewer","patchwork","pbmcapply","cowplot",
+                "gridExtra","reshape2","ggnewscale","BiocManager")
+
+Bioc_packages <- c("DESeq2","org.Hs.eg.db","clusterProfiler",
+                   "fgsea","EnrichmentBrowser")
+
+# installing NMF requires Biobase (installed as part of DESeq2), so install after
+R_packages_late <- c("NMF")
+
+# load/install R packages
+for(R_package in R_packages){
+  
+  message(paste0("attempting to load ",R_package,"..."))
+  
+  if(!require(R_package,character.only=T)){
+    cat("\n")
+    message(paste0(R_package," not found on local computer."))
+    message(paste0("installing ",R_package,"..."))
+    
+    install.packages(R_package)
+    library(R_package,character.only=T)
+  }
+  
+  message(paste0(R_package," successfully loaded."))
+  cat("\n\n")
+}
+
+# load/install Bioconductor packages
+for(Bioc_package in Bioc_packages){
+  
+  message(str_c("attempting to load ",Bioc_package,"..."))
+  
+  if(!require(Bioc_package,character.only=T)){
+    cat("\n")
+    message(paste0(Bioc_package," not found on local computer."))
+    message(str_c("installing ",Bioc_package,"..."))
+    
+    BiocManager::install(Bioc_package)
+    library(Bioc_package,character.only=T)
+  }
+  
+  message(paste0(Bioc_package," successfully loaded."))
+  cat("\n\n")
+}
+
+# install R packages that have Bioconductor dependencies
+for(R_package in R_packages_late){
+  
+  message(paste0("attempting to load ",R_package,"..."))
+  
+  if(!require(R_package,character.only=T)){
+    
+    cat("\n")
+    message(paste0(R_package," not found on local computer."))
+    message(paste0("installing ",R_package,"..."))
+    
+    install.packages(R_package)
+    library(R_package,character.only=T)
+  }
+  
+  message(paste0(R_package," successfully loaded."))
+  cat("\n\n")
+}
+```
