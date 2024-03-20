@@ -10,7 +10,7 @@ Next, open RStudio and enter the following command into the console. It will ins
 install.packages(c("rmarkdown","knitr"))
 ```
 
-Last, run the `Immunogenomics 2 Packages Installation.Rmd` script either by copying and pasting the script into RStudio or by downloading this repository to your local computer. If you need help debugging errors, please contact the teaching team via Slack or email. 
+Last, run the `Immunogenomics 2 Packages Installation.Rmd` script either by copying and pasting the script into RStudio or by downloading this repository to your local computer and running it in R. 
 
 To confirm you have run this script correctly, enter the following command into the console. 
 
